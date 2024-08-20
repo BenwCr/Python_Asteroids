@@ -11,6 +11,9 @@ def main():
     while True:
         pygame.Surface.fill(screen,(0,0,0)) #fill black
         pygame.display.flip() #screen refresh/update
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
 
 
 
