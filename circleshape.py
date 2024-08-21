@@ -1,4 +1,5 @@
 import pygame
+import math
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
@@ -27,3 +28,8 @@ class CircleShape(pygame.sprite.Sprite):
         if distance < objSize:
             return True
         return False
+    
+    def get_circle_coordinates(t):
+        x = math.cos(t)
+        y = math.sin(t)
+        return x, y

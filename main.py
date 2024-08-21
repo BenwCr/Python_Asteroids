@@ -14,6 +14,7 @@ def main():
     pygame.init()
     timeClock = pygame.time.Clock()
     dt = 0
+    score = 0
     updateable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
@@ -35,10 +36,12 @@ def main():
         for obj in asteroids:
             if obj.is_coliding(plyr) is True:
                 print("Game over!")
+                print (f"{score} Asteroids destroyed!")
                 sys.exit()
             for shot in shots:
                 if shot.is_coliding(obj) is True:
-                    obj.split()
+                   obj.split()
+                   score += 1
         pygame.Surface.fill(screen,(0,0,0)) #fill black
         for obj in drawable:
             obj.draw(screen)
@@ -48,6 +51,7 @@ def main():
 
         for event in pygame.event.get(): #quit if window is closed
             if event.type == pygame.QUIT:
+                print (f"{score} Asteroids destroyed!")
                 return
             
 

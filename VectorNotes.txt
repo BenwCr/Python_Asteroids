@@ -1,0 +1,5 @@
+rotate 0 = (0,1)
+rotate 45 = ()
+rotate 90 = 1,0
+rotate 180 = 0,-1  
+rotate 270 = -1, 0
