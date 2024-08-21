@@ -30,15 +30,15 @@ def main():
     while True:
         for obj in updateable:
             obj.update(dt)
-        for asteroid in asteroids:
-            for shot in shots:
-                if shot.is_coliding(asteroid) is True:
-                    asteroid.kill()
+
 
         for obj in asteroids:
             if obj.is_coliding(plyr) is True:
                 print("Game over!")
                 sys.exit()
+            for shot in shots:
+                if shot.is_coliding(obj) is True:
+                    obj.split()
         pygame.Surface.fill(screen,(0,0,0)) #fill black
         for obj in drawable:
             obj.draw(screen)
