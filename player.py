@@ -43,21 +43,21 @@ class Player(CircleShape):
         self.shotTimer -= dt #shot timeout
         
 
-        self.position += self.velocity  * dt #*PLAYER_SPEED
+        self.position += self.velocity  * dt #move them based on Velocity every tick
 
 
-    def move(self,dt):
-        #forward = pygame.Vector2(0, self.acceleration).rotate(self.rotation) (CODE MOVED TO UPDATE)
-        #self.position += forward * PLAYER_SPEED * (dt ** 2)** .5
+    def move(self,dt, player=True):
         newVelocity = pygame.Vector2(self.get_circle_coordinates(self.rotation))
-        self.velocity += newVelocity * PLAYER_SPEED
+        if player == True: #Move called by keys pressed
+            self.velocity += newVelocity * PLAYER_SPEED
+        else: #Move called by shots fired
+            self.velocity -= newVelocity * PLAYER_SHOT_VELOCITY
 
-    def get_circle_coordinates(self,t): #90 degreee correction
+    def get_circle_coordinates(self,t): #Used in self.move
         t = t + 90 # 90 degree correction
         t = t * (math.pi / 180)
         x = math.cos(t)
         y = math.sin(t)
-        print(t)
         return x, y
 
     def shoot(self,dt):
@@ -65,6 +65,7 @@ class Player(CircleShape):
             singleShot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
             singleShot.velocity = pygame.Vector2(0,1).rotate(self.rotation)*PLAYER_SHOOT_SPEED
             self.shotTimer = PLAYER_SHOT_TIMEOUT
+            self.move(dt, player=False)
 
         
         
