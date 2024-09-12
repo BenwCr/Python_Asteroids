@@ -28,6 +28,7 @@ class Player(CircleShape):
     def rotate(self, dt):
         self.rotation += PLAYER_TRUN_SPEED * dt
 
+
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
@@ -42,8 +43,9 @@ class Player(CircleShape):
         
         self.shotTimer -= dt #shot timeout
         
-
         self.position += self.velocity  * dt #move them based on Velocity every tick
+        self.wrap()
+
 
 
     def move(self,dt, player=True):
